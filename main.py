@@ -18,15 +18,14 @@ class ElementsScraper:
         soup = BeautifulSoup(webpage, 'html.parser')
 
         try:
-            features = soup.find('span', class_='form inflected_forms type-infl').find_all('span',class_='lbl type-gram')
             grammars = soup.find('span', class_='form inflected_forms type-infl').find_all('span', class_='orth')
             span_tag = soup.find('span', class_='form inflected_forms type-infl').find_all('span')
+
         except:
             return {q: None}
 
         list1 = []
         list2 = []
-
         list_c = []
 
         for span in span_tag:
@@ -35,36 +34,33 @@ class ElementsScraper:
                 a = span.text
                 b = re.sub('\n', ' ', a)
                 c = re.sub(',', '', b)
-                d = b.strip()
+                d = c.strip()
                 list_c.append(d)
                 # print(f'AS: {a}')
-                # print("compile completed")
             else:
                 b = ''.join(list_c)
                 list1.append(b.strip())
                 list_c.clear()
                 # print(f'Ab: {span.text}')
 
+        # Remove any duplicates from a List:
         list1 = list(dict.fromkeys(list1))
 
         # remote empty string from list
         list1 = list(filter(None, list1))
-        # print(list1)
 
+        # add data list 2:
         for grammar in grammars:
             a = grammar.text
             list2.append(a.strip())
 
-        # print(list2)
-
         '''
         map 2 list -> 1 dict
         '''
-        # assert len(list1) == len(list2)
         res = dict(zip(list1, list2))
 
         print(f'{q}: {res}')
-        # return {q: res}
+        return {q: res}
 
     def word_dict(self):
         words = json.load(open("en.json", encoding="utf8"))
@@ -92,7 +88,6 @@ class ElementsScraper:
         for word in list_words:
             data = self.fetch(word)
             datas.append(data)
-            print(data)
         return datas
 
 

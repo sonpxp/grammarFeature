@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 def req(q: str):
     url = 'https://www.collinsdictionary.com/dictionary/english/' + q
     req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+
     web_byte = urlopen(req).read()
     webpage = web_byte.decode('utf-8')
     soup = BeautifulSoup(webpage, 'html.parser')
@@ -19,7 +20,6 @@ def req(q: str):
 
     list1 = []
     list2 = []
-
     list_c = []
 
     for span in span_tag:
@@ -37,12 +37,11 @@ def req(q: str):
             list_c.clear()
             # print(f'Ab: {span.text}')
 
+    # Remove any duplicates from a List:
     list1 = list(dict.fromkeys(list1))
 
     # remote empty string from list
     list1 = list(filter(None, list1))
-    # print(list1)
-    # print(list(dict.fromkeys(list1)))
 
     # for feature in features:
     #     a = feature.text
@@ -51,6 +50,8 @@ def req(q: str):
     #     list1.append(b)
     #     # print(feature.text)
     #
+
+    # add data list 2
     for grammar in grammars:
         a = grammar.text
         list2.append(a.strip())
@@ -58,7 +59,6 @@ def req(q: str):
     '''
     convert 2 list -> 1 dict
     '''
-    assert len(list1) == len(list2)
     res = dict(zip(list1, list2))
 
     # print(f'{q}: {res}')

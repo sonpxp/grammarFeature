@@ -1,10 +1,8 @@
 import json
 import re
-import urllib.parse
 from urllib.request import Request, urlopen
 
 from bs4 import BeautifulSoup
-import collin_db
 
 
 class ElementsScraper:
@@ -27,10 +25,11 @@ class ElementsScraper:
             span_parent = str(soup.find('span', class_='form inflected_forms type-infl'))
 
         except:
-            return None
+            return {q: None}
 
         list1 = []
         list2 = []
+
         list_c = []
 
         # print(soup.find('span', class_='form inflected_forms type-infl'))
@@ -65,6 +64,7 @@ class ElementsScraper:
         '''
         map 2 list -> 1 dict
         '''
+        # assert len(list1) == len(list2)
         res = dict(zip(list1, list2))
 
         # print(f'{q}: {res}')
@@ -84,15 +84,19 @@ class ElementsScraper:
             # list1.extend(list2)
             list_data.extend(a)
 
+        # print(len(list_data))
+
         # Remove any duplicates from a List:
         list_data = list(dict.fromkeys(list_data))
+        # print(len(list_data))
+        # print(list_data)
         return list_data
 
     def requestHTML(self):
         list_words = self.word_dict()
         datas = []
         for word in list_words:
-            data = self.fetch(word[2169::])
+            data = self.fetch(word)
             # datas.append(data)
             # save to db sqlite3
             collin_db.save_collins_dict_to_db(word, data)

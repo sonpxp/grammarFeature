@@ -63,7 +63,6 @@ def req(q: str):
     '''
     convert 2 list -> 1 dict
     '''
-    assert len(list1) == len(list2)
     res = dict(zip(list1, list2))
 
     # print(f'{q}: {res}')

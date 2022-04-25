@@ -12,5 +12,15 @@
 #         print(a)
 
 # --------------------------
-for i in range(1, 20 + 1):
-    print(i)
+# for i in range(1, 20 + 1):
+#     print(i)
+
+
+list_a = [None, 1, "hello", None, 6]
+# for i in list_a:
+#     print(i[0])
+
+w = list_a[0]
+d = list_a[2]
+
+print(w,d)

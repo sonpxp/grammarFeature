@@ -44,10 +44,5 @@ def save_collins_dict_to_db(word: str, span: str):
     except sqlite3.Error as error:
         print("Failed to insert data into sqlite table: ", error)
 
-    finally:
-        if conn:
-            conn.close()
-            print("the sqlite connection is closed")
-
 
 # save_collins_dict_to_db('abc', 'xyz')

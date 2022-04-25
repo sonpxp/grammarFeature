@@ -26,6 +26,8 @@ class ElementsScraper:
         except:
             return None
 
+        print(f'title: {title.text}')
+
         list1 = []
         list2 = []
         list_c = []
@@ -81,14 +83,18 @@ class ElementsScraper:
         return list_data
 
     def requestHTML(self):
-        list_words = self.word_dict()
-        datas = []
-        for word in list_words:
-            data = self.fetch(word)
-            datas.append(data)
-        return datas
+        pass
+        # list_words = self.word_dict()
+        # datas = []
+        # for word in list_words:
+        #     data = self.fetch(word)
+        #     datas.append(data)
+        # return datas
 
 
-if __name__ == '__main__':
-    scraper = ElementsScraper()
-    scraper.requestHTML()
+scraper = ElementsScraper()
+scraper.fetch('big')
+
+# if __name__ == '__main__':
+#     scraper = ElementsScraper()
+#     scraper.requestHTML()

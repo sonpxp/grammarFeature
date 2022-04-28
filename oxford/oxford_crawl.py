@@ -37,10 +37,8 @@ class OxfordScraper:
             a = data.text
             b = a.split()
 
-
             # print(f'b: {b}')
             # print(f'inflected: {inflected}')
-
 
             # list_c = []
             # for i in inflected:
@@ -68,7 +66,6 @@ class OxfordScraper:
                 else:
                     if regex:
                         pass
-
 
                 print(i)
                 print('--------')
@@ -171,4 +168,4 @@ for c in list_c:
 
 # scraper = OxfordScraper()
 # scraper.run_web_crawler()
-#scraper.save_oxford_dict(list_c)
+# scraper.save_oxford_dict(list_c)
